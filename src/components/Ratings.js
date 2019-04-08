@@ -14,7 +14,8 @@ const styles = {
     marginRight: 5,
   },
   star: {
-    fontSize: 10,
+    fontSize: 8,
+    paddingRight: 5,
   },
 };
 export default class Ratings extends Component {

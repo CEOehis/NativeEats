@@ -2,10 +2,11 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   header: {
-    padding: 20,
-    fontSize: 30,
+    padding: 15,
+    paddingBottom: 10,
+    fontSize: 25,
     color: '#FFFFFF',
-    fontWeight: '300',
+    fontWeight: '700',
     backgroundColor: '#FCA307',
   },
   iOSHeader: {
