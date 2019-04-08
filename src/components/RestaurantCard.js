@@ -74,11 +74,13 @@ const cardStyles = StyleSheet.create({
 
 export default class RestaurantRow extends Component {
   render() {
+    const { restaurant } = this.props;
+    const { id, name, categories, image_url, distance, rating } = restaurant;
     const dimensions = Dimensions.get('window');
     const imageHeight = Math.round((dimensions.width * 9) / 20);
     const imageWidth = dimensions.width;
     return (
-      <View style={cardStyles.card}>
+      <View key={id} style={cardStyles.card}>
         <View style={cardStyles.imageContainer}>
           <View style={cardStyles.absoluteInfoLeft}>
             <Text
@@ -87,7 +89,7 @@ export default class RestaurantRow extends Component {
                 fontWeight: '700',
               }}
             >
-              1.6km
+              {`${(distance / 1000).toFixed(2)} km`}
             </Text>
           </View>
           <View style={cardStyles.absoluteInfoRight}>
@@ -101,8 +103,7 @@ export default class RestaurantRow extends Component {
           </View>
           <Image
             source={{
-              uri:
-                'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&h=450&fit=crop&ixid=eyJhcHBfaWQiOjF9 ',
+              uri: image_url,
             }}
             style={{
               width: imageWidth - 20,
@@ -121,10 +122,12 @@ export default class RestaurantRow extends Component {
               alignItems: 'center',
             }}
           >
-            <Text style={cardStyles.name}>That One Pizza Place</Text>
-            <Text style={cardStyles.location}>ITALIAN</Text>
+            <Text style={cardStyles.name}>{name}</Text>
+            <Text style={cardStyles.location}>
+              {categories.length ? categories[0].alias.toUpperCase() : ''}
+            </Text>
           </View>
-          <Ratings />
+          <Ratings rating={rating} />
         </View>
       </View>
     );

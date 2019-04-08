@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Stars from 'components/Stars';
 
 const styles = {
   container: {
@@ -18,15 +19,12 @@ const styles = {
 };
 export default class Ratings extends Component {
   render() {
+    const { rating } = this.props;
     return (
       <View style={styles.container}>
-        <Text style={styles.rating}>4.9</Text>
+        <Text style={styles.rating}>{rating}</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Icon name="star" color="#FCA307" style={styles.star} />
-          <Icon name="star" color="#FCA307" style={styles.star} />
-          <Icon name="star" color="#FCA307" style={styles.star} />
-          <Icon name="star" color="#FCA307" style={styles.star} />
-          <Icon name="star" color="#FCA307" style={styles.star} />
+          <Stars rating={rating} style={styles.star} />
         </View>
       </View>
     );
