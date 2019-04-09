@@ -75,6 +75,11 @@ const cardStyles = StyleSheet.create({
 });
 
 export default class RestaurantRow extends Component {
+  infoPressed = () => {
+    this.props.navigation.navigate('Info', {
+      restaurant: this.props.restaurant,
+    });
+  };
   render() {
     const { restaurant } = this.props;
     const { id, name, categories, image_url, distance, rating } = restaurant;
@@ -83,54 +88,58 @@ export default class RestaurantRow extends Component {
     const imageWidth = dimensions.width;
     return (
       <View key={id} style={cardStyles.card}>
-        <View style={cardStyles.imageContainer}>
-          <View style={cardStyles.absoluteInfoLeft}>
-            <Text
-              style={{
-                color: '#FFF',
-                fontWeight: '700',
-              }}
-            >
-              {`${(distance / 1000).toFixed(2)} km`}
-            </Text>
-          </View>
-          <View style={cardStyles.absoluteInfoRight}>
-            <SimpleIcon
-              name="heart"
-              style={{
-                color: '#FFF',
-                fontWeight: '700',
-              }}
-            />
-          </View>
-          <Image
-            source={{
-              uri: image_url,
-            }}
-            style={{
-              width: imageWidth - 20,
-              height: imageHeight,
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-            }}
-            resizeMode="cover"
-          />
-        </View>
-        <View style={cardStyles.description}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Text style={cardStyles.name}>{name}</Text>
-            <Text style={cardStyles.location}>
-              {categories.length ? categories[0].alias.toUpperCase() : ''}
-            </Text>
-          </View>
-          <Ratings rating={rating} />
-        </View>
+        <TouchableHighlight onPress={this.infoPressed}>
+          <>
+            <View style={cardStyles.imageContainer}>
+              <View style={cardStyles.absoluteInfoLeft}>
+                <Text
+                  style={{
+                    color: '#FFF',
+                    fontWeight: '700',
+                  }}
+                >
+                  {`${(distance / 1000).toFixed(2)} km`}
+                </Text>
+              </View>
+              <View style={cardStyles.absoluteInfoRight}>
+                <SimpleIcon
+                  name="heart"
+                  style={{
+                    color: '#FFF',
+                    fontWeight: '700',
+                  }}
+                />
+              </View>
+              <Image
+                source={{
+                  uri: image_url,
+                }}
+                style={{
+                  width: imageWidth - 20,
+                  height: imageHeight,
+                  borderTopLeftRadius: 5,
+                  borderTopRightRadius: 5,
+                }}
+                resizeMode="cover"
+              />
+            </View>
+            <View style={cardStyles.description}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <Text style={cardStyles.name}>{name}</Text>
+                <Text style={cardStyles.location}>
+                  {categories.length ? categories[0].alias.toUpperCase() : ''}
+                </Text>
+              </View>
+              <Ratings rating={rating} />
+            </View>
+          </>
+        </TouchableHighlight>
       </View>
     );
   }

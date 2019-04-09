@@ -15,6 +15,9 @@ import RestaurantCard from 'components/RestaurantCard';
 import { API_KEY } from '../../env.config';
 
 export default class RestaurantList extends Component {
+  static navigationOptions = {
+    header: null,
+  };
   state = {
     count: 0,
     restaurants: [],
@@ -76,7 +79,10 @@ export default class RestaurantList extends Component {
           <FlatList
             data={restaurants}
             renderItem={({ item, index }) => (
-              <RestaurantCard restaurant={item} />
+              <RestaurantCard
+                restaurant={item}
+                navigation={this.props.navigation}
+              />
             )}
             keyExtractor={item => item.id}
             initialNumToRender={5}
