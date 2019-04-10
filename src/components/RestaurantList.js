@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   FlatList,
+  ActivityIndicator,
   Image,
 } from 'react-native';
 import axios from 'axios';
@@ -74,7 +75,16 @@ export default class RestaurantList extends Component {
       >
         <Header />
         {loading && page === 0 ? (
-          <Text>...Loading</Text>
+          <ActivityIndicator
+            size="large"
+            color="#0066CC"
+            style={{
+              padding: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+            }}
+          />
         ) : (
           <FlatList
             data={restaurants}
