@@ -8,13 +8,26 @@ import {
   ScrollView,
   FlatList,
   ActivityIndicator,
+  TouchableHighlight,
   Image,
 } from 'react-native';
 import axios from 'axios';
+import SimpleIcon from 'react-native-vector-icons/FontAwesome5';
 import Header from 'components/Header';
 import RestaurantCard from 'components/RestaurantCard';
 import { API_KEY } from '../../env.config';
 
+const styles = StyleSheet.create({
+  input: {
+    padding: 10,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    color: '#444',
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+    backgroundColor: '#FCA307',
+  },
+});
 export default class RestaurantList extends Component {
   static navigationOptions = {
     header: null,
@@ -24,6 +37,7 @@ export default class RestaurantList extends Component {
     restaurants: [],
     page: 0,
     loading: false,
+    search: '',
   };
 
   componentDidMount() {
@@ -35,9 +49,10 @@ export default class RestaurantList extends Component {
     this.setState({
       loading: true,
     });
+    const term = this.state.search;
     axios
       .get(
-        `https://api.yelp.com/v3/businesses/search?term=delis&latitude=37.786882&longitude=-122.399972&limit=50&offset=${offset}`,
+        `https://api.yelp.com/v3/businesses/search?term=${term}&latitude=37.786882&longitude=-122.399972&limit=50&offset=${offset}`,
         {
           headers: {
             Authorization: `Bearer ${API_KEY}`,
@@ -64,6 +79,21 @@ export default class RestaurantList extends Component {
     );
   };
 
+  handleSearch = () => {
+    this.setState(
+      {
+        restaurants: [],
+      },
+      () => {
+        this.getRestaurants();
+      }
+    );
+  };
+
+  focusSearchInput = () => {
+    this.searchInput.focus();
+  };
+
   render() {
     const { loading, restaurants, page } = this.state;
     return (
@@ -74,6 +104,40 @@ export default class RestaurantList extends Component {
         }}
       >
         <Header />
+        <View>
+          <TextInput
+            style={styles.input}
+            placeholder="Search e.g 'food', 'spice'"
+            onSubmitEditing={this.handleSearch}
+            ref={input => {
+              this.searchInput = input;
+            }}
+            onChangeText={text => {
+              this.setState({
+                search: text,
+              });
+            }}
+            value={this.state.search}
+          />
+          <TouchableHighlight
+            style={{
+              position: 'absolute',
+              right: 10,
+              top: 10,
+              paddingLeft: 10,
+              paddingRight: 10,
+            }}
+            onPress={this.focusSearchInput}
+          >
+            <SimpleIcon
+              name="search"
+              style={{
+                fontSize: 20,
+                color: '#fff',
+              }}
+            />
+          </TouchableHighlight>
+        </View>
         {loading && page === 0 ? (
           <ActivityIndicator
             size="large"
