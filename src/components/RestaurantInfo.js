@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { Text, View, Image, Dimensions, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  Dimensions,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import Ratings from 'components/Ratings';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import SimpleIcon from 'react-native-vector-icons/FontAwesome';
+import IonIcons from 'react-native-vector-icons/Ionicons';
 
 const cardStyles = StyleSheet.create({
   description: {
@@ -101,6 +109,8 @@ export default class RestaurantInfo extends Component {
           style={{
             flexDirection: 'row',
             margin: 10,
+            marginLeft: 20,
+            marginRight: 20,
             paddingBottom: 10,
             alignItems: 'center',
             justifyContent: 'space-between',
@@ -168,6 +178,8 @@ export default class RestaurantInfo extends Component {
           style={{
             flexDirection: 'row',
             margin: 10,
+            marginLeft: 20,
+            marginRight: 20,
             paddingBottom: 10,
             alignItems: 'center',
             justifyContent: 'space-around',
@@ -259,6 +271,99 @@ export default class RestaurantInfo extends Component {
               Call
             </Text>
           </View>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            margin: 10,
+            marginLeft: 20,
+            marginRight: 20,
+            paddingBottom: 10,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderBottomWidth: 2,
+            borderBottomColor: '#eee',
+          }}
+        >
+          <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
+          >
+            <Icon
+              name="clock"
+              style={{
+                fontSize: 18,
+                color: '#777',
+                marginRight: 15,
+              }}
+            />
+            <Text
+              style={{
+                color: '#777',
+                fontSize: 18,
+              }}
+            >
+              Open now (07-24h)
+            </Text>
+          </View>
+          <Icon
+            name="angle-down"
+            style={{
+              fontSize: 20,
+              color: '#777',
+              marginRight: 15,
+            }}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            margin: 10,
+            marginLeft: 20,
+            marginRight: 20,
+            paddingBottom: 10,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderBottomWidth: 2,
+            borderBottomColor: '#eee',
+          }}
+        >
+          <View
+            style={{
+              alignItems: 'center',
+              flexDirection: 'row',
+            }}
+          >
+            <Icon
+              name="book-reader"
+              style={{
+                fontSize: 18,
+                color: '#777',
+                marginRight: 15,
+              }}
+            />
+            <Text
+              style={{
+                color: '#777',
+                fontSize: 18,
+              }}
+            >
+              Menu
+            </Text>
+          </View>
+          <IonIcons
+            name={Platform.select({
+              ios: 'ios-link',
+              android: 'md-link',
+            })}
+            style={{
+              fontSize: 20,
+              color: '#777',
+              marginRight: 15,
+            }}
+          />
         </View>
       </View>
     );
