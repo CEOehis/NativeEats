@@ -21,7 +21,7 @@ const cardStyles = StyleSheet.create({
   },
   location: {
     fontWeight: '400',
-    color: '#CCC',
+    color: '#777',
     marginBottom: 5,
   },
   distance: {
@@ -161,6 +161,102 @@ export default class RestaurantInfo extends Component {
               }}
             >
               {`${(distance / 1000).toFixed(2)} km`}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            margin: 10,
+            paddingBottom: 10,
+            alignItems: 'center',
+            justifyContent: 'space-around',
+            borderBottomWidth: 2,
+            borderBottomColor: '#eee',
+          }}
+        >
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
+            <Icon
+              name="phone"
+              style={{
+                fontSize: 20,
+                color: '#777',
+              }}
+            />
+            <Text
+              style={{
+                color: '#777',
+                paddingTop: 10,
+              }}
+            >
+              Call
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
+            <Icon
+              name="globe-asia"
+              style={{
+                fontSize: 20,
+                color: '#777',
+              }}
+            />
+            <Text
+              style={{
+                color: '#777',
+                paddingTop: 10,
+              }}
+            >
+              Website
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
+            <Icon
+              name="directions"
+              style={{
+                fontSize: 20,
+                color: '#777',
+              }}
+            />
+            <Text
+              style={{
+                color: '#777',
+                paddingTop: 10,
+              }}
+            >
+              Directions
+            </Text>
+          </View>
+          <View
+            style={{
+              alignItems: 'center',
+            }}
+          >
+            <SimpleIcon
+              name="comments"
+              style={{
+                fontSize: 20,
+                color: '#777',
+              }}
+            />
+            <Text
+              style={{
+                color: '#777',
+                paddingTop: 10,
+              }}
+            >
+              Call
             </Text>
           </View>
         </View>
