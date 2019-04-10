@@ -38,6 +38,7 @@ export default class RestaurantList extends Component {
     page: 0,
     loading: false,
     search: '',
+    error: '',
   };
 
   componentDidMount() {
@@ -48,6 +49,7 @@ export default class RestaurantList extends Component {
     const offset = this.state.page * 50;
     this.setState({
       loading: true,
+      error: '',
     });
     const term = this.state.search;
     axios
@@ -64,6 +66,13 @@ export default class RestaurantList extends Component {
           count: res.data.total,
           restaurants: [...this.state.restaurants, ...res.data.businesses],
           loading: false,
+        });
+      })
+      .catch(error => {
+        this.setState({
+          loading: false,
+          error:
+            'Unable to fetch Restaurants at this time. Check your internet connection and try again',
         });
       });
   };
@@ -152,6 +161,26 @@ export default class RestaurantList extends Component {
         ) : (
           <FlatList
             data={restaurants}
+            ListEmptyComponent={() => (
+              <View
+                style={{
+                  padding: 10,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  flex: 1,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                  }}
+                >
+                  {this.state.error
+                    ? this.state.error
+                    : 'No restaurants found!'}
+                </Text>
+              </View>
+            )}
             renderItem={({ item, index }) => (
               <RestaurantCard
                 restaurant={item}
