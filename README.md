@@ -22,3 +22,7 @@ Then past your API key in the same file, in the below format
 export const API_KEY =
   'your.yelp.api.key';
 ```
+
+<div style="text-align:center">
+  <img src="app.png" width="400px" />
+</div>
